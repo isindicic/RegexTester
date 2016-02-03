@@ -1,0 +1,11 @@
+# Distribution / packaging
+bin/
+Debug/
+
+# C# obj folder
+obj/
+
+# C# files
+*.suo
+*.user
+*.zip
