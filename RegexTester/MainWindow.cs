@@ -6,20 +6,38 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Reflection;
+using System.IO;
 
 namespace RegexTester
 {
     public partial class MainWindow : Form
     {
-        public string appDirectory = null;
+        private string settingsFile  = null;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            UriBuilder uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
+            settingsFile = Uri.UnescapeDataString(uri.Path);
+            settingsFile = Path.Combine(Path.GetDirectoryName(settingsFile) ,  "RegexTester.xml" );
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            Settings s = Settings.serializeFrom(this.settingsFile);
+            if (s != null)
+            {
+                this.tbRegex.Text = s.regularExpression;
+                this.tbText2Test.Text = s.testText;
+                this.cbAutoCheck.Checked = s.checkAsType;
+                this.cbIgnoreCase.Checked = s.ignoreCase;
+                this.cbSingleLine.Checked = s.singleLine;
+                this.cbMultiLine.Checked = s.multiLine;
+                this.cbRightToLeft.Checked = s.rightToLeft;
+            }
+
             CheckRegex();
             btnCheck.Visible = !cbAutoCheck.Checked;
 
@@ -124,5 +142,19 @@ namespace RegexTester
             Cursor.Current = Cursors.Default;
         }
 
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings s = new Settings();
+
+            s.regularExpression = this.tbRegex.Text;
+            s.testText = this.tbText2Test.Text;
+            s.checkAsType = this.cbAutoCheck.Checked;
+            s.ignoreCase = this.cbIgnoreCase.Checked;
+            s.singleLine = this.cbSingleLine.Checked;
+            s.multiLine = this.cbMultiLine.Checked;
+            s.rightToLeft = this.cbRightToLeft.Checked;
+
+            s.serializeTo(this.settingsFile);
+        }
     }
 }

@@ -208,6 +208,7 @@ namespace RegexTester
             this.Name = "MainWindow";
             this.Text = "Simple .NET RegEx Tester";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
