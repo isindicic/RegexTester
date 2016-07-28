@@ -31,13 +31,16 @@ namespace RegexTester
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
             this.tbRegex = new System.Windows.Forms.TextBox();
-            this.rtbText2Test = new System.Windows.Forms.RichTextBox();
+            this.tbText2Test = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslNomatches = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.cbIgnoreCase = new System.Windows.Forms.CheckBox();
             this.cbSingleLine = new System.Windows.Forms.CheckBox();
             this.cbMultiLine = new System.Windows.Forms.CheckBox();
             this.cbRightToLeft = new System.Windows.Forms.CheckBox();
+            this.cbAutoCheck = new System.Windows.Forms.CheckBox();
+            this.btnCheck = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
@@ -46,18 +49,20 @@ namespace RegexTester
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(12, 9);
+            label1.Location = new System.Drawing.Point(16, 11);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(100, 13);
+            label1.Size = new System.Drawing.Size(134, 17);
             label1.TabIndex = 3;
             label1.Text = "Regular expression:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(12, 51);
+            label2.Location = new System.Drawing.Point(16, 63);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(63, 13);
+            label2.Size = new System.Drawing.Size(82, 17);
             label2.TabIndex = 3;
             label2.Text = "Text to test:";
             // 
@@ -66,49 +71,58 @@ namespace RegexTester
             this.tbRegex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRegex.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tbRegex.Location = new System.Drawing.Point(12, 25);
+            this.tbRegex.Location = new System.Drawing.Point(16, 31);
+            this.tbRegex.Margin = new System.Windows.Forms.Padding(4);
             this.tbRegex.Name = "tbRegex";
-            this.tbRegex.Size = new System.Drawing.Size(661, 23);
+            this.tbRegex.Size = new System.Drawing.Size(717, 27);
             this.tbRegex.TabIndex = 0;
             this.tbRegex.TextChanged += new System.EventHandler(this.tbRegex_TextChanged);
             // 
-            // rtbText2Test
+            // tbText2Test
             // 
-            this.rtbText2Test.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.tbText2Test.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbText2Test.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.rtbText2Test.Location = new System.Drawing.Point(12, 67);
-            this.rtbText2Test.Name = "rtbText2Test";
-            this.rtbText2Test.Size = new System.Drawing.Size(524, 267);
-            this.rtbText2Test.TabIndex = 1;
-            this.rtbText2Test.Text = "";
-            this.rtbText2Test.WordWrap = false;
-            this.rtbText2Test.TextChanged += new System.EventHandler(this.rtbText2Test_TextChanged);
+            this.tbText2Test.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbText2Test.Location = new System.Drawing.Point(16, 82);
+            this.tbText2Test.Margin = new System.Windows.Forms.Padding(4);
+            this.tbText2Test.Name = "tbText2Test";
+            this.tbText2Test.Size = new System.Drawing.Size(717, 328);
+            this.tbText2Test.TabIndex = 1;
+            this.tbText2Test.Text = "";
+            this.tbText2Test.WordWrap = false;
+            this.tbText2Test.TextChanged += new System.EventHandler(this.tbText2Test_TextChanged);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslNomatches});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 346);
+            this.tsslNomatches,
+            this.tsslTime});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(690, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(940, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // tsslNomatches
             // 
             this.tsslNomatches.Name = "tsslNomatches";
-            this.tsslNomatches.Size = new System.Drawing.Size(60, 17);
+            this.tsslNomatches.Size = new System.Drawing.Size(75, 20);
             this.tsslNomatches.Text = "? matches";
+            // 
+            // tsslTime
+            // 
+            this.tsslTime.Name = "tsslTime";
+            this.tsslTime.Size = new System.Drawing.Size(0, 20);
             // 
             // cbIgnoreCase
             // 
             this.cbIgnoreCase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbIgnoreCase.AutoSize = true;
-            this.cbIgnoreCase.Location = new System.Drawing.Point(562, 70);
+            this.cbIgnoreCase.Location = new System.Drawing.Point(756, 113);
+            this.cbIgnoreCase.Margin = new System.Windows.Forms.Padding(4);
             this.cbIgnoreCase.Name = "cbIgnoreCase";
-            this.cbIgnoreCase.Size = new System.Drawing.Size(82, 17);
+            this.cbIgnoreCase.Size = new System.Drawing.Size(154, 21);
             this.cbIgnoreCase.TabIndex = 4;
             this.cbIgnoreCase.Text = "Ignore case";
             this.cbIgnoreCase.UseVisualStyleBackColor = true;
@@ -117,10 +131,10 @@ namespace RegexTester
             // cbSingleLine
             // 
             this.cbSingleLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbSingleLine.AutoSize = true;
-            this.cbSingleLine.Location = new System.Drawing.Point(562, 93);
+            this.cbSingleLine.Location = new System.Drawing.Point(756, 144);
+            this.cbSingleLine.Margin = new System.Windows.Forms.Padding(4);
             this.cbSingleLine.Name = "cbSingleLine";
-            this.cbSingleLine.Size = new System.Drawing.Size(74, 17);
+            this.cbSingleLine.Size = new System.Drawing.Size(154, 21);
             this.cbSingleLine.TabIndex = 4;
             this.cbSingleLine.Text = "Single line";
             this.cbSingleLine.UseVisualStyleBackColor = true;
@@ -129,10 +143,10 @@ namespace RegexTester
             // cbMultiLine
             // 
             this.cbMultiLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbMultiLine.AutoSize = true;
-            this.cbMultiLine.Location = new System.Drawing.Point(562, 116);
+            this.cbMultiLine.Location = new System.Drawing.Point(756, 175);
+            this.cbMultiLine.Margin = new System.Windows.Forms.Padding(4);
             this.cbMultiLine.Name = "cbMultiLine";
-            this.cbMultiLine.Size = new System.Drawing.Size(64, 17);
+            this.cbMultiLine.Size = new System.Drawing.Size(154, 21);
             this.cbMultiLine.TabIndex = 4;
             this.cbMultiLine.Text = "Multiline";
             this.cbMultiLine.UseVisualStyleBackColor = true;
@@ -141,20 +155,46 @@ namespace RegexTester
             // cbRightToLeft
             // 
             this.cbRightToLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbRightToLeft.AutoSize = true;
-            this.cbRightToLeft.Location = new System.Drawing.Point(562, 139);
+            this.cbRightToLeft.Location = new System.Drawing.Point(756, 206);
+            this.cbRightToLeft.Margin = new System.Windows.Forms.Padding(4);
             this.cbRightToLeft.Name = "cbRightToLeft";
-            this.cbRightToLeft.Size = new System.Drawing.Size(80, 17);
+            this.cbRightToLeft.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbRightToLeft.Size = new System.Drawing.Size(154, 21);
             this.cbRightToLeft.TabIndex = 4;
             this.cbRightToLeft.Text = "Right to left";
             this.cbRightToLeft.UseVisualStyleBackColor = true;
             this.cbRightToLeft.CheckedChanged += new System.EventHandler(this.checxBox_CheckedChanged);
             // 
+            // cbAutoCheck
+            // 
+            this.cbAutoCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbAutoCheck.Location = new System.Drawing.Point(756, 84);
+            this.cbAutoCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAutoCheck.Name = "cbAutoCheck";
+            this.cbAutoCheck.Size = new System.Drawing.Size(154, 21);
+            this.cbAutoCheck.TabIndex = 4;
+            this.cbAutoCheck.Text = "Check as you type";
+            this.cbAutoCheck.UseVisualStyleBackColor = true;
+            this.cbAutoCheck.CheckedChanged += new System.EventHandler(this.cbAutoCheck_CheckedChanged);
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheck.Location = new System.Drawing.Point(756, 31);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(137, 27);
+            this.btnCheck.TabIndex = 5;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 368);
+            this.ClientSize = new System.Drawing.Size(940, 453);
+            this.Controls.Add(this.btnCheck);
+            this.Controls.Add(this.cbAutoCheck);
             this.Controls.Add(this.cbRightToLeft);
             this.Controls.Add(this.cbMultiLine);
             this.Controls.Add(this.cbSingleLine);
@@ -162,10 +202,12 @@ namespace RegexTester
             this.Controls.Add(label2);
             this.Controls.Add(label1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.rtbText2Test);
+            this.Controls.Add(this.tbText2Test);
             this.Controls.Add(this.tbRegex);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainWindow";
             this.Text = "Simple .NET RegEx Tester";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -176,13 +218,16 @@ namespace RegexTester
         #endregion
 
         private System.Windows.Forms.TextBox tbRegex;
-        private System.Windows.Forms.RichTextBox rtbText2Test;
+        private System.Windows.Forms.RichTextBox tbText2Test;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslNomatches;
         private System.Windows.Forms.CheckBox cbIgnoreCase;
         private System.Windows.Forms.CheckBox cbSingleLine;
         private System.Windows.Forms.CheckBox cbMultiLine;
         private System.Windows.Forms.CheckBox cbRightToLeft;
+        private System.Windows.Forms.CheckBox cbAutoCheck;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.ToolStripStatusLabel tsslTime;
     }
 }
 
