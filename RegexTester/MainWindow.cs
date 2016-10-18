@@ -8,12 +8,18 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.IO;
+using System.Threading;
 
 namespace SindaSoft.RegexTester
 {
     public partial class MainWindow : Form
     {
         private string settingsFile  = null;
+        private Thread scanThread = null;
+        private bool rescan_required = false;
+
+        private string regex2test = null;
+        private string text2test = null;
 
         public MainWindow()
         {
@@ -45,6 +51,10 @@ namespace SindaSoft.RegexTester
 
         private void tbRegex_TextChanged(object sender, EventArgs e)
         {
+            if (tbRegex.Text.Equals(regex2test))
+                return;
+            regex2test = tbRegex.Text;
+
             btnCheck.Enabled = true;
             if(cbAutoCheck.Checked)
                 CheckRegex();
@@ -52,6 +62,10 @@ namespace SindaSoft.RegexTester
 
         private void tbText2Test_TextChanged(object sender, EventArgs e)
         {
+            if (tbText2Test.Text.Equals(text2test))
+                return;
+            text2test = tbText2Test.Text;
+
             btnCheck.Enabled = true;
             if (cbAutoCheck.Checked)
                 CheckRegex();
@@ -74,71 +88,90 @@ namespace SindaSoft.RegexTester
 
         private void CheckRegex()
         {
-            Cursor.Current = Cursors.WaitCursor;
-            try
+            if (scanThread == null || !scanThread.IsAlive)
             {
-                string pattern = tbRegex.Text;
-                string content = tbText2Test.Text;
+                scanThread = new Thread(new ThreadStart(CheckRegexWorker));
+                scanThread.Start();
+            }
+            else
+                rescan_required = true;
+        }
 
-                int oldStart = tbText2Test.SelectionStart;
-                int oldLen = tbText2Test.SelectionLength;
-
-                tbText2Test.SelectionStart = 0;
-                tbText2Test.SelectionLength = content.Length;
-                tbText2Test.SelectionColor = Color.Black;
-                tbText2Test.SelectionBackColor = Color.White;
-
-                tsslTime.Text = String.Empty;
-
-                if (!String.IsNullOrEmpty(pattern))
-                {
-                    RegexOptions ro = RegexOptions.None;
-                    if (cbIgnoreCase.Checked)
-                        ro |= RegexOptions.IgnoreCase;
-                    if (cbSingleLine.Checked)
-                        ro |= RegexOptions.Singleline;
-                    if (cbMultiLine.Checked)
-                        ro |= RegexOptions.Multiline;
-                    if (cbRightToLeft.Checked)
-                        ro |= RegexOptions.RightToLeft;
-
-                    DateTime start = DateTime.UtcNow;
-                    MatchCollection matches = Regex.Matches(content, pattern, ro);
-                    DateTime end = DateTime.UtcNow;
-
-                    tsslNomatches.Text = matches.Count + " matches";
-                    
-                    TimeSpan duration = end - start;
-                    if (duration.TotalMilliseconds > 0.0)
-                        tsslTime.Text = String.Format("{0:0.000}mSec", duration.TotalMilliseconds);
-
-                    foreach (Match match in matches)
-                    {
-                        foreach (Capture capture in match.Captures)
+        private void CheckRegexWorker()
+        {
+            this.Invoke((MethodInvoker)delegate
                         {
-                            //System.Diagnostics.Debug.WriteLine(String.Format("Index={0}, Value={1}", capture.Index, capture.Value));
+                            Cursor.Current = Cursors.WaitCursor;
+                            try
+                            {
+                                string pattern = tbRegex.Text;
+                                string content = tbText2Test.Text;
 
-                            tbText2Test.SelectionStart = capture.Index;
-                            tbText2Test.SelectionLength = capture.Value.Length;
-                            tbText2Test.SelectionColor = Color.Yellow;
-                            tbText2Test.SelectionBackColor = Color.Red;
-                        }
-                    }
-                }
-                else
-                    tsslNomatches.Text = "No regular expression specified";
+                                int oldStart = tbText2Test.SelectionStart;
+                                int oldLen = tbText2Test.SelectionLength;
 
-                tbText2Test.SelectionStart = oldStart;
-                tbText2Test.SelectionLength = oldLen;
-                tbRegex.ForeColor = Color.Black;
-                btnCheck.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                tbRegex.ForeColor = Color.Red;
-                tsslNomatches.Text = ex.Message;
-            }
-            Cursor.Current = Cursors.Default;
+                                tbText2Test.SelectionStart = 0;
+                                tbText2Test.SelectionLength = content.Length;
+                                tbText2Test.SelectionColor = Color.Black;
+                                tbText2Test.SelectionBackColor = Color.White;
+
+                                tsslTime.Text = String.Empty;
+
+                                if (!String.IsNullOrEmpty(pattern))
+                                {
+                                    RegexOptions ro = RegexOptions.None;
+                                    if (cbIgnoreCase.Checked)
+                                        ro |= RegexOptions.IgnoreCase;
+                                    if (cbSingleLine.Checked)
+                                        ro |= RegexOptions.Singleline;
+                                    if (cbMultiLine.Checked)
+                                        ro |= RegexOptions.Multiline;
+                                    if (cbRightToLeft.Checked)
+                                        ro |= RegexOptions.RightToLeft;
+
+                                    DateTime start = DateTime.UtcNow;
+                                    MatchCollection matches = Regex.Matches(content, pattern, ro);
+                                    DateTime end = DateTime.UtcNow;
+
+                                    tsslNomatches.Text = matches.Count + " matches";
+                                    TimeSpan duration = end - start;
+                                    if (duration.TotalMilliseconds > 0.0)
+                                        tsslTime.Text = String.Format("{0:0.000}mSec", duration.TotalMilliseconds);
+                                    foreach (Match match in matches)
+                                    {
+                                        foreach (Capture capture in match.Captures)
+                                        {
+                                            //System.Diagnostics.Debug.WriteLine(String.Format("Index={0}, Value={1}", capture.Index, capture.Value));
+
+                                            tbText2Test.SelectionStart = capture.Index;
+                                            tbText2Test.SelectionLength = capture.Value.Length;
+                                            tbText2Test.SelectionColor = Color.Yellow;
+                                            tbText2Test.SelectionBackColor = Color.Red;
+                                        }
+                                    }
+                                }
+                                else
+                                    tsslNomatches.Text = "No regular expression specified";
+
+                                tbText2Test.SelectionStart = oldStart;
+                                tbText2Test.SelectionLength = oldLen;
+                                tbRegex.ForeColor = Color.Black;
+                                btnCheck.Enabled = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                tbRegex.ForeColor = Color.Red;
+                                tsslNomatches.Text = ex.Message;
+                            }
+                            Cursor.Current = Cursors.Default;
+
+                            if (rescan_required)
+                            {
+                                rescan_required = false;
+                                scanThread = new Thread(new ThreadStart(CheckRegexWorker));
+                                scanThread.Start();
+                            }
+                        });
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
