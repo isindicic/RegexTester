@@ -1,4 +1,4 @@
-namespace RegexTester
+namespace SindaSoft.RegexTester
 {
     partial class MainWindow
     {
@@ -74,7 +74,7 @@ namespace RegexTester
             this.tbRegex.Location = new System.Drawing.Point(16, 31);
             this.tbRegex.Margin = new System.Windows.Forms.Padding(4);
             this.tbRegex.Name = "tbRegex";
-            this.tbRegex.Size = new System.Drawing.Size(717, 27);
+            this.tbRegex.Size = new System.Drawing.Size(721, 27);
             this.tbRegex.TabIndex = 0;
             this.tbRegex.TextChanged += new System.EventHandler(this.tbRegex_TextChanged);
             // 
@@ -87,7 +87,7 @@ namespace RegexTester
             this.tbText2Test.Location = new System.Drawing.Point(16, 82);
             this.tbText2Test.Margin = new System.Windows.Forms.Padding(4);
             this.tbText2Test.Name = "tbText2Test";
-            this.tbText2Test.Size = new System.Drawing.Size(717, 328);
+            this.tbText2Test.Size = new System.Drawing.Size(721, 337);
             this.tbText2Test.TabIndex = 1;
             this.tbText2Test.Text = "";
             this.tbText2Test.WordWrap = false;
@@ -98,10 +98,10 @@ namespace RegexTester
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslNomatches,
             this.tsslTime});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 437);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(940, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(944, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -118,8 +118,8 @@ namespace RegexTester
             // 
             // cbIgnoreCase
             // 
-            this.cbIgnoreCase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbIgnoreCase.Location = new System.Drawing.Point(756, 113);
+            this.cbIgnoreCase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIgnoreCase.Location = new System.Drawing.Point(760, 305);
             this.cbIgnoreCase.Margin = new System.Windows.Forms.Padding(4);
             this.cbIgnoreCase.Name = "cbIgnoreCase";
             this.cbIgnoreCase.Size = new System.Drawing.Size(154, 21);
@@ -130,8 +130,8 @@ namespace RegexTester
             // 
             // cbSingleLine
             // 
-            this.cbSingleLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbSingleLine.Location = new System.Drawing.Point(756, 144);
+            this.cbSingleLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSingleLine.Location = new System.Drawing.Point(760, 336);
             this.cbSingleLine.Margin = new System.Windows.Forms.Padding(4);
             this.cbSingleLine.Name = "cbSingleLine";
             this.cbSingleLine.Size = new System.Drawing.Size(154, 21);
@@ -142,8 +142,8 @@ namespace RegexTester
             // 
             // cbMultiLine
             // 
-            this.cbMultiLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbMultiLine.Location = new System.Drawing.Point(756, 175);
+            this.cbMultiLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbMultiLine.Location = new System.Drawing.Point(760, 367);
             this.cbMultiLine.Margin = new System.Windows.Forms.Padding(4);
             this.cbMultiLine.Name = "cbMultiLine";
             this.cbMultiLine.Size = new System.Drawing.Size(154, 21);
@@ -154,8 +154,8 @@ namespace RegexTester
             // 
             // cbRightToLeft
             // 
-            this.cbRightToLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbRightToLeft.Location = new System.Drawing.Point(756, 206);
+            this.cbRightToLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbRightToLeft.Location = new System.Drawing.Point(760, 398);
             this.cbRightToLeft.Margin = new System.Windows.Forms.Padding(4);
             this.cbRightToLeft.Name = "cbRightToLeft";
             this.cbRightToLeft.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -168,7 +168,7 @@ namespace RegexTester
             // cbAutoCheck
             // 
             this.cbAutoCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbAutoCheck.Location = new System.Drawing.Point(756, 84);
+            this.cbAutoCheck.Location = new System.Drawing.Point(760, 84);
             this.cbAutoCheck.Margin = new System.Windows.Forms.Padding(4);
             this.cbAutoCheck.Name = "cbAutoCheck";
             this.cbAutoCheck.Size = new System.Drawing.Size(154, 21);
@@ -180,7 +180,7 @@ namespace RegexTester
             // btnCheck
             // 
             this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheck.Location = new System.Drawing.Point(756, 31);
+            this.btnCheck.Location = new System.Drawing.Point(760, 31);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(137, 27);
             this.btnCheck.TabIndex = 5;
@@ -192,7 +192,7 @@ namespace RegexTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 453);
+            this.ClientSize = new System.Drawing.Size(944, 462);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.cbAutoCheck);
             this.Controls.Add(this.cbRightToLeft);

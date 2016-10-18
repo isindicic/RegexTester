@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Reflection;
 using System.IO;
 
-namespace RegexTester
+namespace SindaSoft.RegexTester
 {
     public partial class MainWindow : Form
     {
@@ -138,7 +138,6 @@ namespace RegexTester
                 tbRegex.ForeColor = Color.Red;
                 tsslNomatches.Text = ex.Message;
             }
-
             Cursor.Current = Cursors.Default;
         }
 

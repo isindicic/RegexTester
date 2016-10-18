@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace RegexTester
+namespace SindaSoft.RegexTester
 {
     public class Settings
     {
