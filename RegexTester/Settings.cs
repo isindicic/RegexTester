@@ -15,6 +15,10 @@ namespace SindaSoft.RegexTester
         public bool singleLine;
         public bool multiLine;
         public bool rightToLeft;
+        public bool ignoreWhitespace;
+        public bool ecma;
+        public bool cultureInvariant;
+        public bool cultureExplicit;
 
         #region Xml Serialization
 

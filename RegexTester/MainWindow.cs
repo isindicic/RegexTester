@@ -42,11 +42,52 @@ namespace SindaSoft.RegexTester
                 this.cbSingleLine.Checked = s.singleLine;
                 this.cbMultiLine.Checked = s.multiLine;
                 this.cbRightToLeft.Checked = s.rightToLeft;
+                this.cbIgnoreWhitespace.Checked = s.ignoreWhitespace;
+                this.cbECMA.Checked = s.ecma;
+                this.cbCultureInvariant.Checked = s.cultureInvariant;
+                this.cbExpCulture.Checked = s.cultureExplicit;
             }
 
             CheckRegex();
             btnCheck.Visible = !cbAutoCheck.Checked;
 
+
+            ToolTip tt = new ToolTip();
+            tt.InitialDelay = 1000;
+            tt.AutoPopDelay = 5000;
+            tt.ReshowDelay = 500;
+            tt.ShowAlways = true;
+
+            tt.SetToolTip(this.cbIgnoreCase,  @"Specifies case-insensitive matching");
+
+            tt.SetToolTip(this.cbSingleLine,   "Specifies single-line mode. Changes the meaning of the dot (.) so it matches every\n" + 
+                                               @"character (instead of every character except \n).");
+
+            tt.SetToolTip(this.cbMultiLine,    "Multiline mode. Changes the meaning of ^ and $ so they match at the beginning and end,\n" + 
+                                               "respectively, of any line, and not just the beginning and end of the entire string.");
+
+            tt.SetToolTip(this.cbRightToLeft, @"Specifies that the search will be from right to left instead of from left to right.");
+
+            tt.SetToolTip(this.cbIgnoreWhitespace,  "Eliminates unescaped white space from the pattern and enables comments marked with #.\n"+
+                                                    "However, the System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace value\n" +
+                                                    "does not affect or eliminate white space in character classes.");
+
+            tt.SetToolTip(this.cbIgnoreWhitespace, "Enables ECMAScript-compliant behavior for the expression. This value can\n" +
+                                                    "be used only in conjunction with the System.Text.RegularExpressions.RegexOptions.IgnoreCase,\n" +
+                                                    "System.Text.RegularExpressions.RegexOptions.Multiline, and System.Text.RegularExpressions.RegexOptions.Compiled\n" +
+                                                    "values. The use of this value with any other values results in an exception.");
+
+            tt.SetToolTip(this.cbECMA, @"Specifies case-insensitive matching");
+
+            tt.SetToolTip(this.cbCultureInvariant, "Specifies that cultural differences in language is ignored. See Performing\n"+
+                                                   "Culture-Insensitive Operations in the RegularExpressions Namespace for more\n"+
+                                                   "information.");
+
+            tt.SetToolTip(this.cbExpCulture, "Specifies that the only valid captures are explicitly named or numbered groups\n"+
+                                             "of the form (?<name>…). This allows unnamed parentheses to act as noncapturing\n"+
+                                             "groups without the syntactic clumsiness of the expression (?:…).");
+
+        
         }
 
         private void tbRegex_TextChanged(object sender, EventArgs e)
@@ -128,6 +169,14 @@ namespace SindaSoft.RegexTester
                                         ro |= RegexOptions.Multiline;
                                     if (cbRightToLeft.Checked)
                                         ro |= RegexOptions.RightToLeft;
+                                    if (cbExpCulture.Checked)
+                                        ro |= RegexOptions.ExplicitCapture;
+                                    if (cbCultureInvariant.Checked)
+                                        ro |= RegexOptions.CultureInvariant;
+                                    if (cbECMA.Checked)
+                                        ro |= RegexOptions.ECMAScript;
+                                    if (cbIgnoreWhitespace.Checked)
+                                        ro |= RegexOptions.IgnorePatternWhitespace;
 
                                     DateTime start = DateTime.UtcNow;
                                     MatchCollection matches = Regex.Matches(content, pattern, ro);
@@ -185,6 +234,10 @@ namespace SindaSoft.RegexTester
             s.singleLine = this.cbSingleLine.Checked;
             s.multiLine = this.cbMultiLine.Checked;
             s.rightToLeft = this.cbRightToLeft.Checked;
+            s.ignoreWhitespace = this.cbIgnoreWhitespace.Checked;
+            s.ecma = this.cbECMA.Checked;
+            s.cultureInvariant = this.cbCultureInvariant.Checked;
+            s.cultureExplicit = this.cbExpCulture.Checked;
 
             s.serializeTo(this.settingsFile);
         }

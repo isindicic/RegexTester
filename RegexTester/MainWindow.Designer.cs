@@ -41,6 +41,10 @@ namespace SindaSoft.RegexTester
             this.cbRightToLeft = new System.Windows.Forms.CheckBox();
             this.cbAutoCheck = new System.Windows.Forms.CheckBox();
             this.btnCheck = new System.Windows.Forms.Button();
+            this.cbExpCulture = new System.Windows.Forms.CheckBox();
+            this.cbCultureInvariant = new System.Windows.Forms.CheckBox();
+            this.cbECMA = new System.Windows.Forms.CheckBox();
+            this.cbIgnoreWhitespace = new System.Windows.Forms.CheckBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
@@ -74,7 +78,7 @@ namespace SindaSoft.RegexTester
             this.tbRegex.Location = new System.Drawing.Point(16, 31);
             this.tbRegex.Margin = new System.Windows.Forms.Padding(4);
             this.tbRegex.Name = "tbRegex";
-            this.tbRegex.Size = new System.Drawing.Size(721, 27);
+            this.tbRegex.Size = new System.Drawing.Size(673, 27);
             this.tbRegex.TabIndex = 0;
             this.tbRegex.TextChanged += new System.EventHandler(this.tbRegex_TextChanged);
             // 
@@ -87,7 +91,7 @@ namespace SindaSoft.RegexTester
             this.tbText2Test.Location = new System.Drawing.Point(16, 82);
             this.tbText2Test.Margin = new System.Windows.Forms.Padding(4);
             this.tbText2Test.Name = "tbText2Test";
-            this.tbText2Test.Size = new System.Drawing.Size(721, 337);
+            this.tbText2Test.Size = new System.Drawing.Size(673, 376);
             this.tbText2Test.TabIndex = 1;
             this.tbText2Test.Text = "";
             this.tbText2Test.WordWrap = false;
@@ -98,10 +102,10 @@ namespace SindaSoft.RegexTester
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslNomatches,
             this.tsslTime});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 437);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 476);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(944, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(896, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -119,7 +123,7 @@ namespace SindaSoft.RegexTester
             // cbIgnoreCase
             // 
             this.cbIgnoreCase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbIgnoreCase.Location = new System.Drawing.Point(760, 305);
+            this.cbIgnoreCase.Location = new System.Drawing.Point(712, 282);
             this.cbIgnoreCase.Margin = new System.Windows.Forms.Padding(4);
             this.cbIgnoreCase.Name = "cbIgnoreCase";
             this.cbIgnoreCase.Size = new System.Drawing.Size(154, 21);
@@ -131,7 +135,7 @@ namespace SindaSoft.RegexTester
             // cbSingleLine
             // 
             this.cbSingleLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbSingleLine.Location = new System.Drawing.Point(760, 336);
+            this.cbSingleLine.Location = new System.Drawing.Point(712, 344);
             this.cbSingleLine.Margin = new System.Windows.Forms.Padding(4);
             this.cbSingleLine.Name = "cbSingleLine";
             this.cbSingleLine.Size = new System.Drawing.Size(154, 21);
@@ -143,7 +147,7 @@ namespace SindaSoft.RegexTester
             // cbMultiLine
             // 
             this.cbMultiLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbMultiLine.Location = new System.Drawing.Point(760, 367);
+            this.cbMultiLine.Location = new System.Drawing.Point(712, 375);
             this.cbMultiLine.Margin = new System.Windows.Forms.Padding(4);
             this.cbMultiLine.Name = "cbMultiLine";
             this.cbMultiLine.Size = new System.Drawing.Size(154, 21);
@@ -155,7 +159,7 @@ namespace SindaSoft.RegexTester
             // cbRightToLeft
             // 
             this.cbRightToLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbRightToLeft.Location = new System.Drawing.Point(760, 398);
+            this.cbRightToLeft.Location = new System.Drawing.Point(712, 406);
             this.cbRightToLeft.Margin = new System.Windows.Forms.Padding(4);
             this.cbRightToLeft.Name = "cbRightToLeft";
             this.cbRightToLeft.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -168,7 +172,7 @@ namespace SindaSoft.RegexTester
             // cbAutoCheck
             // 
             this.cbAutoCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbAutoCheck.Location = new System.Drawing.Point(760, 84);
+            this.cbAutoCheck.Location = new System.Drawing.Point(712, 84);
             this.cbAutoCheck.Margin = new System.Windows.Forms.Padding(4);
             this.cbAutoCheck.Name = "cbAutoCheck";
             this.cbAutoCheck.Size = new System.Drawing.Size(154, 21);
@@ -180,7 +184,7 @@ namespace SindaSoft.RegexTester
             // btnCheck
             // 
             this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheck.Location = new System.Drawing.Point(760, 31);
+            this.btnCheck.Location = new System.Drawing.Point(712, 31);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(137, 27);
             this.btnCheck.TabIndex = 5;
@@ -188,16 +192,69 @@ namespace SindaSoft.RegexTester
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
+            // cbExpCulture
+            // 
+            this.cbExpCulture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbExpCulture.Location = new System.Drawing.Point(712, 251);
+            this.cbExpCulture.Margin = new System.Windows.Forms.Padding(4);
+            this.cbExpCulture.Name = "cbExpCulture";
+            this.cbExpCulture.Size = new System.Drawing.Size(154, 21);
+            this.cbExpCulture.TabIndex = 4;
+            this.cbExpCulture.Text = "Explicit culture";
+            this.cbExpCulture.UseVisualStyleBackColor = true;
+            this.cbExpCulture.CheckedChanged += new System.EventHandler(this.checxBox_CheckedChanged);
+            // 
+            // cbCultureInvariant
+            // 
+            this.cbCultureInvariant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCultureInvariant.Location = new System.Drawing.Point(712, 220);
+            this.cbCultureInvariant.Margin = new System.Windows.Forms.Padding(4);
+            this.cbCultureInvariant.Name = "cbCultureInvariant";
+            this.cbCultureInvariant.Size = new System.Drawing.Size(154, 21);
+            this.cbCultureInvariant.TabIndex = 4;
+            this.cbCultureInvariant.Text = "Culture invariant";
+            this.cbCultureInvariant.UseVisualStyleBackColor = true;
+            this.cbCultureInvariant.CheckedChanged += new System.EventHandler(this.checxBox_CheckedChanged);
+            // 
+            // cbECMA
+            // 
+            this.cbECMA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbECMA.Location = new System.Drawing.Point(712, 437);
+            this.cbECMA.Margin = new System.Windows.Forms.Padding(4);
+            this.cbECMA.Name = "cbECMA";
+            this.cbECMA.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbECMA.Size = new System.Drawing.Size(154, 21);
+            this.cbECMA.TabIndex = 4;
+            this.cbECMA.Text = "ECMA";
+            this.cbECMA.UseVisualStyleBackColor = true;
+            this.cbECMA.CheckedChanged += new System.EventHandler(this.checxBox_CheckedChanged);
+            // 
+            // cbIgnoreWhitespace
+            // 
+            this.cbIgnoreWhitespace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIgnoreWhitespace.Location = new System.Drawing.Point(712, 313);
+            this.cbIgnoreWhitespace.Margin = new System.Windows.Forms.Padding(4);
+            this.cbIgnoreWhitespace.Name = "cbIgnoreWhitespace";
+            this.cbIgnoreWhitespace.Size = new System.Drawing.Size(154, 21);
+            this.cbIgnoreWhitespace.TabIndex = 4;
+            this.cbIgnoreWhitespace.Text = "Ignore whitespace";
+            this.cbIgnoreWhitespace.UseVisualStyleBackColor = true;
+            this.cbIgnoreWhitespace.CheckedChanged += new System.EventHandler(this.checxBox_CheckedChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 462);
+            this.ClientSize = new System.Drawing.Size(896, 501);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.cbAutoCheck);
+            this.Controls.Add(this.cbECMA);
             this.Controls.Add(this.cbRightToLeft);
             this.Controls.Add(this.cbMultiLine);
             this.Controls.Add(this.cbSingleLine);
+            this.Controls.Add(this.cbCultureInvariant);
+            this.Controls.Add(this.cbExpCulture);
+            this.Controls.Add(this.cbIgnoreWhitespace);
             this.Controls.Add(this.cbIgnoreCase);
             this.Controls.Add(label2);
             this.Controls.Add(label1);
@@ -205,6 +262,7 @@ namespace SindaSoft.RegexTester
             this.Controls.Add(this.tbText2Test);
             this.Controls.Add(this.tbRegex);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(505, 444);
             this.Name = "MainWindow";
             this.Text = "Simple .NET RegEx Tester";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -229,6 +287,10 @@ namespace SindaSoft.RegexTester
         private System.Windows.Forms.CheckBox cbAutoCheck;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.ToolStripStatusLabel tsslTime;
+        private System.Windows.Forms.CheckBox cbExpCulture;
+        private System.Windows.Forms.CheckBox cbCultureInvariant;
+        private System.Windows.Forms.CheckBox cbECMA;
+        private System.Windows.Forms.CheckBox cbIgnoreWhitespace;
     }
 }
 
